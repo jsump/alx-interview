@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Module: 0-pascal_triangle
 This module contans a function that prints out Pascal's triangle
