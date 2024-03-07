@@ -1,4 +1,16 @@
+"""
+Module: 0-pascal_triangle
+This module contans a function that prints out Pascal's triangle
+"""
+
+
 def pascal_triangle(n):
+    """
+    This function prints out Pascal's triangle
+
+    n can always be an integer
+    Return an empty list if n <= 0
+    """
     if n <= 0:
         return []
 
