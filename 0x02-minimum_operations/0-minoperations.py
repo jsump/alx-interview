@@ -24,8 +24,8 @@ def minOperations(n):
         minNumOfOp[i] = float('inf')
         for j in range(1, int(i ** 0.5) + 1):
             if i % j == 0:
-                minNumOfOp = min(minNumOfOp[i], minNumOfOp[j] + i // j)
+                minNumOfOp[i] = min(minNumOfOp[i], minNumOfOp[j] + i // j)
 
-                minNumOfOp = min(minNumOfOp[i], minNumOfOp[i //j] + j)
+                minNumOfOp[i] = min(minNumOfOp[i], minNumOfOp[i //j] + j)
 
-    return minNumOfOp if minNumOfOp[n] != float('inf') else 0
+    return minNumOfOp[n] if minNumOfOp[n] != float('inf') else 0
