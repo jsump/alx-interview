@@ -61,4 +61,4 @@ try:
 
 
 except KeyboardInterrupt:
-    print(f"File size: {total_file_size}")
+    pass
