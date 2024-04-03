@@ -2,7 +2,7 @@
 """
 Module: 0-validate_utf8.py
 
-This module contains a function that determines if a gien
+This module contains a function that determines if a given
 dataset represents UTF-8 encoding
 """
 
@@ -13,13 +13,13 @@ def validUTF8(data):
     a valid UTF-8 encoding
 
     Dataset can have multiple characters
-    Dataset eill be represented by a list of integers
+    Dataset will be represented by a list of integers
 
     Return: True if data is a valid UTF-8 encoding, else return False
     """
     num_bytes = 0
 
-    # MAsk to check if the second most significant bit it set
+    # Mask to check if the first and second most significant bit are set
     mask1 = 1 << 7
     mask2 = 1 << 6
 
@@ -35,9 +35,9 @@ def validUTF8(data):
                 continue
             if num_bytes == 1 or num_bytes > 4:
                 return False
-            else:
-                if not (num & mask1 and not (num & mask2)):
-                    return False
+        else:
+            if not (num & mask1 and not (num & mask2)):
+                return False
 
         num_bytes -= 1
     return num_bytes == 0
