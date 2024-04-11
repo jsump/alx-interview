@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 """
 Module: 0-nqueens.py
 
@@ -14,8 +14,11 @@ def is_valid(board, row, col, N):
     This method checks if queen can be in board
     """
     for i in range(row):
-        if board[i] == col or board[i] - 1 == col - row or board[i] + i == col + row:
-            return False
+        if board[i] == col or board[i] - 1 == col - row or \
+                board[i] + i == col + row:
+                    return False
+    return True
+
 
 def solve_queen(board, row, N, solutions):
     """
@@ -27,7 +30,8 @@ def solve_queen(board, row, N, solutions):
         for col in range(N):
             if all(is_valid(board, row, col, N) for row in range(row)):
                 board[row] = col
-                solve_queen(board, row, col, N, solutions)
+                solve_queen(board, row + 1, N, solutions)
+
 
 def nqueens(N):
     """
@@ -37,20 +41,18 @@ def nqueens(N):
         print("N must be a number")
         sys.exit(1)
 
-        N = int(N)
-        if N < 4:
-            print("N must be greater or equal to 4")
-            sys.exit(1)
-        
-        board = [-1]
-        solutions = []
-        solve_queen(board, 0, N, solutions)
+    N = int(N)
+    if N < 4:
+        print("N must be greater or equal to 4")
+        sys.exit(1)
 
-        for solution in solutions:
-            print("[", end="" ")
-            for col in solutions:
-                print(col end=" ")
-            print("]")
+    board = [-1] * N
+    solutions = []
+    solve_queen(board, 0, N, solutions)
+
+    for solution in solutions:
+        formatted_solution = [[i, col] for i, col in enumerate(solution)]
+        print(formatted_solution)
 
 
 if __name__ == "__main__":
