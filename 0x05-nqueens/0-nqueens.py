@@ -14,9 +14,9 @@ def is_valid(board, row, col, N):
     This method checks if queen can be in board
     """
     for i in range(row):
-        if board[i] == col or board[i] - 1 == col - row or \
+        if board[i] == col or board[i] - i == col - row or \
                 board[i] + i == col + row:
-                    return False
+            return False
     return True
 
 
@@ -28,7 +28,7 @@ def solve_queen(board, row, N, solutions):
         solutions.append(list(board))
     else:
         for col in range(N):
-            if all(is_valid(board, row, col, N) for row in range(row)):
+            if is_valid(board, row, col, N):
                 board[row] = col
                 solve_queen(board, row + 1, N, solutions)
 
