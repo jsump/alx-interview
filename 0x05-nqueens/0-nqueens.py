@@ -43,7 +43,7 @@ def nqueens(N):
 
     N = int(N)
     if N < 4:
-        print("N must be greater or equal to 4")
+        print("N must be at least 4")
         sys.exit(1)
 
     board = [-1] * N
