@@ -15,6 +15,8 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
+    coins.sort(reverse=True)
+    
     # Dictionary to store fewest number of coins for each amnt
     min_coins = {0: 0}
 
