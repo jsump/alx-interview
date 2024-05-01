@@ -16,15 +16,13 @@ def makeChange(coins, total):
         return 0
 
     coins.sort(reverse=True)
-    
-    # Dictionary to store fewest number of coins for each amnt
-    min_coins = {0: 0}
 
+    coin_count = 0
     for coin in coins:
-        for amnt in range(coin, total + 1):
-            if amnt - coin in min_coins:
-                min_coins[amnt] = min(min_coins.get(
-                    amnt, float('inf')
-                    ), min_coins[amnt - coin] + 1)
+        while total >= coin:
+            total -= coin
+            coin_count += 1
+        if total == 0:
+            return coin_count
 
-    return min_coins.get(total, -1)
+    return -1
