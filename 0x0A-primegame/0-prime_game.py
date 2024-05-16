@@ -7,29 +7,31 @@ Prime game
 
 def isWinner(x, nums):
     """
-    Determines the winner of the prime game.
+    This function takes turns between Ben and maria to prick prime numners.
+    They take turns choosing a prime number from the set,
+    and removing that number and its multiples from the set.
+    The player that cannot make a move loses the game.
 
-    Args:
-    - x: the number of rounds
-    - nums: an array of n for each round
+    x: the number of rounds
+    nums: an array of n
+    Return: name of the player that won the most rounds
 
-    Returns:
-    - The name of the player that won the most rounds.
-      If the winner cannot be determined, returns None.
+    If the winner cannot be determined, return None
+    You can assume n and x will not be larger than 10000
+    You cannot import any packages in this task maria_wins = 0
     """
-
-    maria_wins = 0
     ben_wins = 0
+    maria_wins = 0
+
+    max_number = max(nums)
+    primes = generate_primes(max_number)
 
     for n in nums:
-        # Count the number of prime numbers left after Maria and Ben's turns
-        primes_left = count_primes_left(n)
-        
-        # If there are an even number of primes left, Ben wins; otherwise, Maria wins
-        if primes_left % 2 == 0:
-            ben_wins += 1
-        else:
+        # Check if n is 1 or a prime number
+        if n == 1 or n in primes:
             maria_wins += 1
+        else:
+            ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
@@ -38,32 +40,18 @@ def isWinner(x, nums):
     else:
         return None
 
-def count_primes_left(n):
+
+def generate_primes(n):
     """
-    Counts the number of prime numbers left after Maria and Ben's turns.
-
-    Args:
-    - n: the number for the current round
-
-    Returns:
-    - The count of prime numbers left in the set after Maria and Ben's turns.
+    This function generates prime numbers up to a given number
+    using 
     """
-
-    primes_left = 0
-    remaining = set(range(2, n + 1))
-
-    while remaining:
-        # Maria's turn
-        prime = min(remaining)
-        primes_left += 1
-        remaining -= set(range(prime, n + 1, prime))
-
-        # Check if Ben can make a move
-        if not remaining:
-            break
-
-        # Ben's turn
-        prime = min(remaining)
-        remaining -= set(range(prime, n + 1, prime))
-
-    return primes_left
+    primes = []
+    sieve = [True] * (n+1)
+    sieve[0] = sieve[1] = False
+    for p in range(2, int(n**0.5)+1):
+        if sieve[p]:
+            primes.append(p)
+            for i in range(p*p, n+1, p):
+                sieve[i] = False
+    return primes
