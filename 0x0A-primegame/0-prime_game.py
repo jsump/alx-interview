@@ -14,46 +14,41 @@ def isWinner(x, nums):
     - nums: an array of n for each round
 
     Returns:
-    - The name of the player that won the most rounds.
+    - The name of the player that wins the game.
       If the winner cannot be determined, returns None.
     """
 
     ben_wins = 0
     maria_wins = 0
 
+    if not nums:
+        return None
+
     for n in nums:
-        # Generate primes using Sieve of Eratosthenes
-        primes = generate_primes(n)
-
-        # Check if n is 1 or a prime number
-        if n == 1 or n in primes:
-            maria_wins += 1
-        else:
+        if n == 1 or is_prime(n):
             ben_wins += 1
+        else:
+            maria_wins += 1
 
-    if ben_wins >= maria_wins:
-        return "Ben"
-    else:
+    if maria_wins >= ben_wins:
         return "Maria"
+    else:
+        return "Ben"
 
 
-def generate_primes(n):
+def is_prime(n):
     """
-    Generates prime numbers up to a given number using Sieve of Eratosthenes.
+    Checks if a number is prime.
 
     Args:
-    - n: the upper limit for generating primes
+    - n: the number to check
 
     Returns:
-    - A set containing prime numbers up to n
+    - True if n is prime, False otherwise
     """
-
-    primes = set()
-    sieve = [True] * (n+1)
-    sieve[0] = sieve[1] = False
-    for p in range(2, int(n**0.5)+1):
-        if sieve[p]:
-            primes.add(p)
-            for i in range(p*p, n+1, p):
-                sieve[i] = False
-    return primes
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
