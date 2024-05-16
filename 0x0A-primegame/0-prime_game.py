@@ -21,6 +21,9 @@ def isWinner(x, nums):
     ben_wins = 0
     maria_wins = 0
 
+    if not nums:
+        return None
+    
     for n in nums:
         # Generate primes using Sieve of Eratosthenes
         primes = generate_primes(n)
