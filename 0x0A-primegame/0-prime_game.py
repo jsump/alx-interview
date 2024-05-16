@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+"""
+Module: 0-prime_game
+Prime game
+"""
+
+
 def isWinner(x, nums):
     """
     Determines the winner of the prime game.
