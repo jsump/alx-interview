@@ -18,8 +18,11 @@ def isWinner(x, nums):
       If the winner cannot be determined, returns None.
     """
 
-    ben_wins = 0
+    bben_wins = 0
     maria_wins = 0
+
+    if not nums:
+        return None
 
     for n in nums:
         # Generate primes using Sieve of Eratosthenes
@@ -31,11 +34,12 @@ def isWinner(x, nums):
         else:
             ben_wins += 1
 
-    if ben_wins >= maria_wins:
+    if ben_wins > maria_wins:
         return "Ben"
-    else:
+    elif maria_wins > ben_wins:
         return "Maria"
-
+    else:
+        return None
 
 def generate_primes(n):
     """
