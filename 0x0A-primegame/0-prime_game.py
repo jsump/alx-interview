@@ -44,6 +44,7 @@ def isWinner(x, nums):
 def generate_primes(n):
     """
     This function generates prime numbers up to a given number
+    using Sieve of Eratosthenes
     """
     primes = []
     sieve = [True] * (n+1)
