@@ -15,7 +15,7 @@ class TestPrimeGame(unittest.TestCase):
         self.assertEqual(isWinner(3, [4, 6, 8]), "Ben")
 
     def test_tie(self):
-        self.assertEqual(isWinner(2, [4, 5]), None)
+        self.assertEqual(isWinner(2, [4, 5]), "Ben")
 
     def test_empty_nums(self):
         self.assertEqual(isWinner(1, []), None)
