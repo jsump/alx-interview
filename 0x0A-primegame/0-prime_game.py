@@ -24,19 +24,18 @@ def isWinner(x, nums):
     for n in nums:
         # Generate primes using Sieve of Eratosthenes
         primes = generate_primes(n)
-        
+
         # Check if n is 1 or a prime number
         if n == 1 or n in primes:
             maria_wins += 1
         else:
             ben_wins += 1
 
-    if ben_wins > maria_wins:
+    if ben_wins >= maria_wins:
         return "Ben"
-    elif maria_wins > ben_wins:
-        return "Maria"
     else:
-        return None
+        return "Maria"
+
 
 def generate_primes(n):
     """
