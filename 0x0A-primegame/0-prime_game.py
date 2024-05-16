@@ -25,17 +25,15 @@ def isWinner(x, nums):
         return None
 
     for n in nums:
-        if is_prime(n):
+        if n == 1 or is_prime(n):
             ben_wins += 1
         else:
             maria_wins += 1
 
-    if maria_wins > ben_wins:
+    if maria_wins >= ben_wins:
         return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
     else:
-        return None
+        return "Ben"
 
 
 def is_prime(n):
