@@ -17,38 +17,54 @@ def isWinner(x, nums):
     - The name of the player that wins the game.
       If the winner cannot be determined, returns None.
     """
-
-    ben_wins = 0
-    maria_wins = 0
-
-    if not nums:
+    if not nums or x < 1:
         return None
 
+    def sieve(n):
+        is_prime = [True] * (n + 1)
+        p = 2
+        while (p * p <= n):
+            if is_prime[p]:
+                for i in range(p * p, n + 1, p):
+                    is_prime[i] = False
+            p += 1
+        is_prime[0] = is_prime[1] = False
+        primes = []
+        for p in range(n + 1):
+            if is_prime[p]:
+                primes.append(p)
+        return primes
+
+    # Prepare the prime numbers for all rounds up to the maximum n
+    max_n = max(nums)
+    primes = sieve(max_n)
+
+    maria_wins = 0
+    ben_wins = 0
+
     for n in nums:
-        if n == 1 or is_prime(n):
+        primes_in_game = [p for p in primes if p <= n]
+        moves = 0
+        while primes_in_game:
+            # Maria's turn
+            if moves % 2 == 0:
+                prime = primes_in_game[0]
+            # Ben's turn
+            else:
+                prime = primes_in_game[-1]
+
+            # Remove the prime and its multiples
+            primes_in_game = [p for p in primes_in_game if p % prime != 0]
+            moves += 1
+
+        if moves % 2 == 0:
             ben_wins += 1
         else:
             maria_wins += 1
 
-    if maria_wins >= ben_wins:
+    if maria_wins > ben_wins:
         return "Maria"
-    else:
+    elif ben_wins > maria_wins:
         return "Ben"
-
-
-def is_prime(n):
-    """
-    Checks if a number is prime.
-
-    Args:
-    - n: the number to check
-
-    Returns:
-    - True if n is prime, False otherwise
-    """
-    if n <= 1:
-        return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+    else:
+        return None
