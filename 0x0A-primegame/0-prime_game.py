@@ -35,32 +35,34 @@ def isWinner(x, nums):
                 primes.append(p)
         return primes
 
-    # Prepare the prime numbers for all rounds up to the maximum n
     max_n = max(nums)
     primes = sieve(max_n)
+
+    def calculate_winner(n):
+        if n < 2:
+            return "Ben"
+
+        primes_in_game = [p for p in primes if p <= n]
+        moves = 0
+        while primes_in_game:
+            prime = primes_in_game[0]
+            primes_in_game = [p for p in primes_in_game if p % prime != 0]
+            moves += 1
+
+        if moves % 2 == 0:
+            return "Ben"
+        else:
+            return "Maria"
 
     maria_wins = 0
     ben_wins = 0
 
     for n in nums:
-        primes_in_game = [p for p in primes if p <= n]
-        moves = 0
-        while primes_in_game:
-            # Maria's turn
-            if moves % 2 == 0:
-                prime = primes_in_game[0]
-            # Ben's turn
-            else:
-                prime = primes_in_game[-1]
-
-            # Remove the prime and its multiples
-            primes_in_game = [p for p in primes_in_game if p % prime != 0]
-            moves += 1
-
-        if moves % 2 == 0:
-            ben_wins += 1
-        else:
+        winner = calculate_winner(n)
+        if winner == "Maria":
             maria_wins += 1
+        else:
+            ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
@@ -68,3 +70,4 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
+    
