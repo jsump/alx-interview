@@ -21,6 +21,8 @@ def isWinner(x, nums):
         return None
 
     def sieve(n):
+        """Generate list of prime numbers up to n using
+        the Sieve of Eratosthenes."""
         is_prime = [True] * (n + 1)
         p = 2
         while (p * p <= n):
@@ -39,6 +41,7 @@ def isWinner(x, nums):
     primes = sieve(max_n)
 
     def calculate_winner(n):
+        """Calculate the winner for a single round."""
         if n < 2:
             return "Ben"
 
@@ -70,4 +73,3 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
-    
