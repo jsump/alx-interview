@@ -21,8 +21,10 @@ def isWinner(x, nums):
         return None
 
     def sieve(n):
-        """Generate list of prime numbers up to n using
-        the Sieve of Eratosthenes."""
+        """
+        Generate list of prime numbers up to n using
+        the Sieve of Eratosthenes.
+        """
         is_prime = [True] * (n + 1)
         p = 2
         while (p * p <= n):
